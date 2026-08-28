@@ -4,6 +4,8 @@ Code, run artifacts and the interactive project page for a controlled
 cross-regime evaluation and component ablation of medium-aware 3D Gaussian
 splatting on subsea survey data.
 
+![Five code-available Gaussian-splatting systems run under one protocol across four water regimes; on the EIVA survey scene vanilla 3DGS scores lower in PSNR than SeaSplat but reconstructs far cleaner geometry.](docs/assets/graphical_abstract.png)
+
 - **Paper:** [arXiv:2608.25483](https://arxiv.org/abs/2608.25483)
 - **Project page (interactive point clouds):** <https://olayasturias.github.io/uw3dgs/>
 

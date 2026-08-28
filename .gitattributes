@@ -9,3 +9,6 @@
 
 # Point clouds and thumbnails on the project page.
 *.ply    binary
+
+# Self-contained SVG carries base64 image payloads; keep it byte-exact.
+*.svg    -text
