@@ -80,17 +80,22 @@
   <div class="container is-max-desktop">
     <h2 class="title is-4 has-text-centered">Abstract</h2>
     <p style="text-align: justify;">
-      Underwater adaptations of 3D Gaussian splatting add medium models, depth priors and backscatter terms,
-      and report their gains almost exclusively as held-out PSNR. We evaluate five code-available systems under
-      one controlled protocol &mdash; shared poses, initialisation, budget and evaluator &mdash; across four regimes:
-      the field's default shallow benchmark, a tank with measured turbidity and encoder ground-truth poses, a deep
-      vent under co-moving ROV light, and an industrial survey with a metric photogrammetric reference. Turbidity
-      saturates PSNR itself (a static median image gains more from murky water than any model), the classical SfM
-      the field initialises from collapses from 99.5&thinsp;% to 0&thinsp;% registration between 0 and 12&thinsp;NTU,
-      and on the benchmark the correlation between PSNR rank and geometric cleanliness is <em>positive</em>
-      (&rho;&nbsp;=&nbsp;+0.70): the better a system scores, the more floating opacity it carries. A component ablation
-      shows the underwater machinery buys appearance, not geometry &mdash; and a plain restore-then-splat baseline
-      produces the best surfaces on the operational scene in 27 minutes.
+      The underwater environment is challenging for 3D reconstruction, because particles suspended in the
+      water scatter and diffuse light, turbidity varies, absorption depends on wavelength, and illumination
+      is rarely uniform. Methods based on Gaussian splatting have generally been developed for conditions
+      that allow good image quality, and have primarily been tested on relatively shallow water. This paper
+      examines how well Gaussian splatting performs across publicly available underwater datasets
+      representing different degrees of turbidity, loss of illumination, and colour attenuation, together
+      with an industrial survey. Five systems with public code are run under one protocol, with shared
+      poses, initialisation, budget, and evaluator, to establish their relative advantages, disadvantages,
+      and limitations. What these methods can do turns out to depend more on the setup than on the
+      architecture. Water clarity binds upstream of rendering, since structure-from-motion registers
+      99.5&thinsp;% of frames in clear water and 0.0&thinsp;% at 12&thinsp;NTU. Illumination geometry decides
+      whether a medium model helps at all: under an artificial light that moves with the camera,
+      medium-blind splatting beats both medium-aware systems. On the survey the benchmark's photometric
+      leader comes last, beaten on geometry by a restoration pre-pass in front of vanilla 3DGS&mdash;and none
+      of it is visible in the scores the field reports. Scene builds, per-run configurations, and evaluation
+      code are released at <a href="https://github.com/olayasturias/uw3dgs">this repository</a>.
     </p>
   </div>
 </section>
