@@ -3,18 +3,18 @@
 # under each candidate rotation convention; the right one produces a dense,
 # low-error model. Features/matches are pose-independent -> computed once.
 set -e
-COLMAP=/d/uw3dgs/colmap/bin/colmap.exe
-PY=/d/envs/uw3dgs/python.exe
-IMG=/d/Datasets/SOTRUE/trial1/turbid0/left
-CSV=/d/Datasets/SOTRUE/sotrue/scripts/interpolated_image_poses/turbid0_trial1/left_interpolated_timestamps.csv
-W=/d/uw3dgs/convtest
+COLMAP=${COLMAP:-colmap}
+PY=${PY:-python}
+IMG=${IMG:?set IMG to <SOTRUE>/trial1/turbid0/left}
+CSV=${CSV:?set CSV to the interpolated left-camera timestamps for turbid0/trial1}
+W=${W:-./convtest}
 CAM="OPENCV,1920,1216,788.57634,787.13041,980.65685,571.03147,-0.016788,-0.002846,-0.003082,-0.000599"
 
 mkdir -p $W
 # image list = every 8th pose row's image
-$PY /d/uw3dgs/tools/pose2colmap.py --source sotrue --poses $CSV --out $W/model_c2w_optical --rot-mode c2w_optical --subsample 8 --camera "$CAM"
-$PY /d/uw3dgs/tools/pose2colmap.py --source sotrue --poses $CSV --out $W/model_w2c_optical --rot-mode w2c_optical --subsample 8 --camera "$CAM"
-$PY /d/uw3dgs/tools/pose2colmap.py --source sotrue --poses $CSV --out $W/model_c2w_ros     --rot-mode c2w_ros     --subsample 8 --camera "$CAM"
+$PY "$(dirname "$0")/pose2colmap.py" --source sotrue --poses $CSV --out $W/model_c2w_optical --rot-mode c2w_optical --subsample 8 --camera "$CAM"
+$PY "$(dirname "$0")/pose2colmap.py" --source sotrue --poses $CSV --out $W/model_w2c_optical --rot-mode w2c_optical --subsample 8 --camera "$CAM"
+$PY "$(dirname "$0")/pose2colmap.py" --source sotrue --poses $CSV --out $W/model_c2w_ros     --rot-mode c2w_ros     --subsample 8 --camera "$CAM"
 awk '{print $10}' $W/model_c2w_optical/images.txt | grep -v '^$' > $W/list.txt
 wc -l $W/list.txt
 

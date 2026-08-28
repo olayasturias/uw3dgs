@@ -1,16 +1,16 @@
 #!/bin/sh
 # Same empirical convention test for EIVA plane_nose pose_gt.txt.
 set -e
-COLMAP=/d/uw3dgs/colmap/bin/colmap.exe
-PY=/d/envs/uw3dgs/python.exe
-IMG=/d/Datasets/EIVA/vobster_quay/plane_nose/processed/left
-POSES=/d/Datasets/EIVA/vobster_quay/plane_nose/pose_gt.txt
-W=/d/uw3dgs/convtest_pn
+COLMAP=${COLMAP:-colmap}
+PY=${PY:-python}
+IMG=${IMG:?set IMG to the processed left-camera image directory}
+POSES=${POSES:?set POSES to the ground-truth pose file}
+W=${W:-./convtest_pn}
 CAM="PINHOLE,2816,2816,1847.5905420747683,1847.5905420747683,1391.3,1407.177"
 
 mkdir -p $W
 for MODE in w2c_direct w2c_direct_gl c2w_optical_gl; do
-  $PY /d/uw3dgs/tools/pose2colmap.py --source planenose --poses $POSES --out $W/model_$MODE --rot-mode $MODE --subsample 8 --camera "$CAM"
+  $PY "$(dirname "$0")/pose2colmap.py" --source planenose --poses $POSES --out $W/model_$MODE --rot-mode $MODE --subsample 8 --camera "$CAM"
 done
 awk '{print $10}' $W/model_c2w_optical/images.txt | grep -v '^$' > $W/list.txt
 wc -l $W/list.txt
