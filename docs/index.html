@@ -28,6 +28,27 @@
   .bibtex { background: #f5f5f5; border-radius: 8px; padding: 1rem; font-size: 0.85rem;
             white-space: pre; overflow-x: auto; text-align: left; }
   .finding-num { font-weight: 700; color: #3273dc; }
+  /* ground-truth vs render wipe slider */
+  #cmp-wrap { max-width: 960px; margin: 0 auto; }
+  #cmp { position: relative; width: 100%; overflow: hidden; border-radius: 10px;
+         background: #101318; touch-action: none; cursor: ew-resize;
+         user-select: none; -webkit-user-select: none; }
+  #cmp img { display: block; width: 100%; height: auto; pointer-events: none; }
+  #cmp .cmp-top { position: absolute; inset: 0; overflow: hidden; }
+  #cmp .cmp-top img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  #cmp-divider { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff;
+                 box-shadow: 0 0 0 1px rgba(0,0,0,.35); pointer-events: none; }
+  #cmp-divider::after { content: ''; position: absolute; top: 50%; left: 50%;
+                 width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%;
+                 background: rgba(255,255,255,.9); box-shadow: 0 1px 4px rgba(0,0,0,.4); }
+  .cmp-tag { position: absolute; top: 10px; color: #fff; font-size: .8rem;
+             background: rgba(16,19,24,.62); padding: 2px 10px; border-radius: 9999px;
+             pointer-events: none; }
+  .cmp-tag-l { left: 10px; } .cmp-tag-r { right: 10px; }
+  .cmp-chip { cursor: pointer; border: 1px solid #dbdbdb; background: #fff; color: #363636;
+              border-radius: 9999px; padding: 3px 12px; font-size: .82rem; margin: .15rem; }
+  .cmp-chip.active { background: #3273dc; border-color: #3273dc; color: #fff; }
+  .cmp-note { font-size: .8rem; color: #7a7a7a; }
 </style>
 </head>
 <body>
@@ -112,6 +133,32 @@
 
 <section class="section pt-0">
   <div class="container is-max-desktop has-text-centered">
+    <h2 class="title is-4">Ground truth vs. reconstruction</h2>
+    <p class="teaser-caption mb-3" style="margin-top:-0.25rem;">
+      Drag the divider. Left of it is the held-out ground-truth frame, right of it the
+      same view rendered by the selected system. Every image is a real held-out test
+      view, never a training frame.
+    </p>
+    <div id="cmp-scenes" class="mb-2"></div>
+    <div id="cmp-blurb" class="cmp-note mb-3"></div>
+    <div id="cmp-wrap">
+      <div id="cmp" tabindex="0" role="slider" aria-label="Ground truth versus rendered view"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <img id="cmp-base" alt="Held-out ground-truth frame">
+        <div class="cmp-top"><img id="cmp-over" alt="The same view rendered by the selected system"></div>
+        <div id="cmp-divider"></div>
+        <span class="cmp-tag cmp-tag-l">Ground truth</span>
+        <span class="cmp-tag cmp-tag-r" id="cmp-tag-r"></span>
+      </div>
+    </div>
+    <div id="cmp-methods" class="mt-3"></div>
+    <div id="cmp-views" class="mt-1"></div>
+    <p class="cmp-note mt-2" id="cmp-caveat"></p>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop has-text-centered">
     <h2 class="title is-4">Held-out renders across the four regimes</h2>
     <img src="assets/fig_qual.png" alt="Qualitative grid: ground truth vs M0/M2/M3 across four regimes" style="max-width:100%; border-radius:8px;">
     <p class="figure-caption">Ground truth beside vanilla 3DGS (M0), WaterSplatting (M2) and SeaSplat (M3) on one held-out
@@ -189,6 +236,111 @@
     <a href="https://superspl.at/editor">SuperSplat</a>.
   </div>
 </footer>
+
+<script>
+// Ground-truth vs render wipe slider. Plain script on purpose: no build step,
+// and it must keep working if the three.js module below fails to load.
+(function () {
+  var cmp = document.getElementById('cmp');
+  var base = document.getElementById('cmp-base');
+  var over = document.getElementById('cmp-over');
+  var divider = document.getElementById('cmp-divider');
+  var tagR = document.getElementById('cmp-tag-r');
+  var elScenes = document.getElementById('cmp-scenes');
+  var elMethods = document.getElementById('cmp-methods');
+  var elViews = document.getElementById('cmp-views');
+  var elBlurb = document.getElementById('cmp-blurb');
+  var elCaveat = document.getElementById('cmp-caveat');
+
+  var man = null, scene = null, view = null, method = null, split = 50;
+
+  function setSplit(pct) {
+    split = Math.max(0, Math.min(100, pct));
+    over.parentNode.style.clipPath = 'inset(0 0 0 ' + split + '%)';
+    divider.style.left = split + '%';
+    cmp.setAttribute('aria-valuenow', Math.round(split));
+  }
+
+  function chip(label, active, onClick) {
+    var b = document.createElement('button');
+    b.className = 'cmp-chip' + (active ? ' active' : '');
+    b.textContent = label;
+    b.onclick = onClick;
+    return b;
+  }
+
+  function methodLabel(key) {
+    for (var i = 0; i < scene.methods.length; i++)
+      if (scene.methods[i].key === key) return scene.methods[i].label;
+    return key;
+  }
+
+  function render() {
+    var dir = 'assets/compare/' + scene.key + '/';
+    base.src = dir + view.key + '_gt.jpg';
+    over.src = dir + view.key + '_' + method + '.jpg';
+    cmp.style.aspectRatio = view.w + ' / ' + view.h;
+    tagR.textContent = methodLabel(method);
+    elBlurb.textContent = scene.blurb;
+    elCaveat.textContent = method === 'm1'
+      ? 'M1 restores each image before splatting, so it renders its own enhanced targets. Judge it on structure, not on colour match against the ground truth.'
+      : '';
+
+    elMethods.innerHTML = '';
+    scene.methods.forEach(function (m) {
+      if (m.key === 'gt') return;
+      if (view.have.indexOf(m.key) < 0) return;
+      elMethods.appendChild(chip(m.label, m.key === method, function () {
+        method = m.key; render();
+      }));
+    });
+
+    elViews.innerHTML = '';
+    scene.views.forEach(function (v, i) {
+      elViews.appendChild(chip('view ' + (i + 1), v.key === view.key, function () {
+        view = v;
+        if (view.have.indexOf(method) < 0) method = view.have.filter(function (k) { return k !== 'gt'; })[0];
+        render();
+      }));
+    });
+    setSplit(split);
+  }
+
+  function pickScene(sc) {
+    scene = sc;
+    view = sc.views[0];
+    method = view.have.filter(function (k) { return k !== 'gt'; })[0];
+    elScenes.innerHTML = '';
+    man.scenes.forEach(function (s2) {
+      elScenes.appendChild(chip(s2.label, s2.key === sc.key, function () { pickScene(s2); }));
+    });
+    render();
+  }
+
+  // drag / tap / keyboard
+  function fromEvent(e) {
+    var r = cmp.getBoundingClientRect();
+    setSplit(((e.clientX - r.left) / r.width) * 100);
+  }
+  var dragging = false;
+  cmp.addEventListener('pointerdown', function (e) { dragging = true; cmp.setPointerCapture(e.pointerId); fromEvent(e); });
+  cmp.addEventListener('pointermove', function (e) { if (dragging) fromEvent(e); });
+  cmp.addEventListener('pointerup', function (e) { dragging = false; cmp.releasePointerCapture(e.pointerId); });
+  cmp.addEventListener('pointercancel', function () { dragging = false; });
+  cmp.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { setSplit(split - 2); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { setSplit(split + 2); e.preventDefault(); }
+  });
+
+  fetch('assets/compare/manifest.json')
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (m) { man = m; pickScene(m.scenes[0]); })
+    .catch(function (err) {
+      elBlurb.textContent = 'Could not load the comparison set (' + err.message +
+        '). If you opened this page from disk, browsers block fetch on file:// URLs; serve the folder over http instead.';
+    });
+})();
+</script>
 
 <script type="importmap">
 { "imports": {

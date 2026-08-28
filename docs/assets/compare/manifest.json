@@ -1,0 +1,352 @@
+{
+ "width": 1100,
+ "scenes": [
+  {
+   "key": "s1_curacao",
+   "label": "S1 \u00b7 SeaThru-NeRF (Cura\u00e7ao)",
+   "blurb": "The field's default shallow benchmark: clear, naturally lit water.",
+   "views": [
+    {
+     "key": "v000",
+     "stem": "MTN_1288",
+     "w": 1100,
+     "h": 728,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3",
+      "m4"
+     ]
+    },
+    {
+     "key": "v001",
+     "stem": "MTN_1296",
+     "w": 1100,
+     "h": 728,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3",
+      "m4"
+     ]
+    },
+    {
+     "key": "v002",
+     "stem": "MTN_1304",
+     "w": 1100,
+     "h": 728,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3",
+      "m4"
+     ]
+    }
+   ],
+   "methods": [
+    {
+     "key": "gt",
+     "label": "Ground truth"
+    },
+    {
+     "key": "m0",
+     "label": "M0 3DGS"
+    },
+    {
+     "key": "m1",
+     "label": "M1 UIE\u21923DGS*"
+    },
+    {
+     "key": "m2",
+     "label": "M2 WaterSplatting"
+    },
+    {
+     "key": "m3",
+     "label": "M3 SeaSplat"
+    },
+    {
+     "key": "m4",
+     "label": "M4 UW-GS"
+    }
+   ]
+  },
+  {
+   "key": "s2_clear0NTU",
+   "label": "S2 \u00b7 SOTRUE 0 NTU",
+   "blurb": "Turbidity-controlled stereo tank, clear water, encoder ground-truth poses.",
+   "views": [
+    {
+     "key": "v000",
+     "stem": "left_000001",
+     "w": 1100,
+     "h": 697,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    },
+    {
+     "key": "v008",
+     "stem": "left_000257",
+     "w": 1100,
+     "h": 697,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    },
+    {
+     "key": "v016",
+     "stem": "left_000513",
+     "w": 1100,
+     "h": 697,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    }
+   ],
+   "methods": [
+    {
+     "key": "gt",
+     "label": "Ground truth"
+    },
+    {
+     "key": "m0",
+     "label": "M0 3DGS"
+    },
+    {
+     "key": "m1",
+     "label": "M1 UIE\u21923DGS*"
+    },
+    {
+     "key": "m2",
+     "label": "M2 WaterSplatting"
+    },
+    {
+     "key": "m3",
+     "label": "M3 SeaSplat"
+    }
+   ]
+  },
+  {
+   "key": "s2_turbid12NTU",
+   "label": "S2 \u00b7 SOTRUE 12 NTU",
+   "blurb": "The same tank and trajectory at 12 NTU, where SfM registers 0 % of frames.",
+   "views": [
+    {
+     "key": "v000",
+     "stem": "left_000001",
+     "w": 1100,
+     "h": 697,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    },
+    {
+     "key": "v008",
+     "stem": "left_000257",
+     "w": 1100,
+     "h": 697,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    },
+    {
+     "key": "v016",
+     "stem": "left_000513",
+     "w": 1100,
+     "h": 697,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    }
+   ],
+   "methods": [
+    {
+     "key": "gt",
+     "label": "Ground truth"
+    },
+    {
+     "key": "m0",
+     "label": "M0 3DGS"
+    },
+    {
+     "key": "m1",
+     "label": "M1 UIE\u21923DGS*"
+    },
+    {
+     "key": "m2",
+     "label": "M2 WaterSplatting"
+    },
+    {
+     "key": "m3",
+     "label": "M3 SeaSplat"
+    }
+   ]
+  },
+  {
+   "key": "s3_eiffel",
+   "label": "S3 \u00b7 Eiffel Tower vent",
+   "blurb": "Deep hydrothermal vent under a light that moves with the ROV.",
+   "views": [
+    {
+     "key": "v000",
+     "stem": "20150418T024020_000Z",
+     "w": 1100,
+     "h": 618,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    },
+    {
+     "key": "v014",
+     "stem": "20150418T024556_000Z",
+     "w": 1100,
+     "h": 618,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    },
+    {
+     "key": "v028",
+     "stem": "20150418T025132_000Z",
+     "w": 1100,
+     "h": 618,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    }
+   ],
+   "methods": [
+    {
+     "key": "gt",
+     "label": "Ground truth"
+    },
+    {
+     "key": "m0",
+     "label": "M0 3DGS"
+    },
+    {
+     "key": "m1",
+     "label": "M1 UIE\u21923DGS*"
+    },
+    {
+     "key": "m2",
+     "label": "M2 WaterSplatting"
+    },
+    {
+     "key": "m3",
+     "label": "M3 SeaSplat"
+    }
+   ]
+  },
+  {
+   "key": "planenose",
+   "label": "S4 \u00b7 EIVA survey",
+   "blurb": "Industrial survey scene with a metric photogrammetric reference.",
+   "views": [
+    {
+     "key": "v000",
+     "stem": "image_left_processed_SYSTEM_2023-10-05T135629_217450_CAL_66",
+     "w": 1100,
+     "h": 1100,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    },
+    {
+     "key": "v023",
+     "stem": "image_left_processed_SYSTEM_2023-10-05T135959_815344_CAL_864",
+     "w": 1100,
+     "h": 1100,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    },
+    {
+     "key": "v046",
+     "stem": "image_left_processed_SYSTEM_2023-10-05T140333_213102_CAL_1679",
+     "w": 1100,
+     "h": 1100,
+     "have": [
+      "gt",
+      "m0",
+      "m1",
+      "m2",
+      "m3"
+     ]
+    }
+   ],
+   "methods": [
+    {
+     "key": "gt",
+     "label": "Ground truth"
+    },
+    {
+     "key": "m0",
+     "label": "M0 3DGS"
+    },
+    {
+     "key": "m1",
+     "label": "M1 UIE\u21923DGS*"
+    },
+    {
+     "key": "m2",
+     "label": "M2 WaterSplatting"
+    },
+    {
+     "key": "m3",
+     "label": "M3 SeaSplat"
+    }
+   ]
+  }
+ ]
+}
