@@ -1,0 +1,7 @@
+[
+  {"id": "e1_s1_m4", "system": "uwgs", "scene": "D:/uw3dgs/scenes/s1_curacao", "iters": 30000, "port": 6080},
+  {"id": "e1_s4_m4", "system": "uwgs", "scene": "D:/uw3dgs/scenes/s4_planenose", "iters": 30000, "port": 6081},
+  {"id": "e1_s1_m1", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s1_curacao_uie", "iters": 30000, "port": 6082},
+  {"id": "e1_s4_m1", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s4_planenose_uie", "iters": 30000, "port": 6083},
+  {"id": "e5_s3dense_m0", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s3_eiffel2015_dense", "iters": 30000, "port": 6084}
+]

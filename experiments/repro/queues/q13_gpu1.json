@@ -1,0 +1,8 @@
+[
+  {"id": "e2_t5_m4_7k", "system": "uwgs", "scene": "D:/uw3dgs/scenes/s2_turbid5_trial1", "iters": 7000, "port": 6150, "border": 32,
+   "_note": "TRUNCATED to 7k iters: qualitative renders only, NOT comparable to 30k cells (M4 infeasible at 30k, see FINDINGS F24)"},
+  {"id": "e5_s3dense_m4_7k", "system": "uwgs", "scene": "D:/uw3dgs/scenes/s3_eiffel2015_dense", "iters": 7000, "port": 6151,
+   "_note": "TRUNCATED to 7k iters: qualitative renders only"},
+  {"id": "e1_s4_m4_7k", "system": "uwgs", "scene": "D:/uw3dgs/scenes/s4_planenose", "iters": 7000, "port": 6152,
+   "_note": "TRUNCATED to 7k iters: qualitative renders only; 30k terminated at 19k/30k after 13.5 h"}
+]

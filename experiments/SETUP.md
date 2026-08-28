@@ -43,11 +43,11 @@ Smoke test = truncated training run (500 iters, or 1000+100 for recgs) on
 | Repo | Cloned | Deps | Extension | Import | Smoke train | Notes |
 |---|---|---|---|---|---|---|
 | gaussian-splatting | ✓ | ✓ | ✓ | ✓ | **PASS** (34 it/s) | |
-| seasplat | ✓ | ✓ | ✓ | ✓ | **PASS** incl. seathru path + full metrics pass | no licence — patches stay local |
-| UW-GS | ✓ | ✓ | ✓ | ✓ | **PASS** after 2 bug fixes (log #5, #11) | no licence — patches stay local |
-| 3D-UIR | ✓ | ✓ | ✓ | ✓ | **PASS** | no licence — patches stay local |
-| recgs | ✓ | ✓ | ✓ | ✓ | **PASS** both stages (stage 2 ran full 69k iters to completion) | no licence — patches stay local |
-| RUSplatting | ✓ | ✓ | ✓ | ✓ | **PASS** (with depthmaps) | no licence; NEVER run submodule init here |
+| seasplat | ✓ | ✓ | ✓ | ✓ | **PASS** incl. seathru path + full metrics pass | Inria/MPII GS licence (inherited) |
+| UW-GS | ✓ | ✓ | ✓ | ✓ | **PASS** after 2 bug fixes (log #5, #11) | Inria/MPII GS licence (inherited) |
+| 3D-UIR | ✓ | ✓ | ✓ | ✓ | **PASS** | Pi-Lab License 1.0 (non-commercial) |
+| recgs | ✓ | ✓ | ✓ | ✓ | **PASS** both stages (stage 2 ran full 69k iters to completion) | Inria/MPII GS licence (inherited) |
+| RUSplatting | ✓ | ✓ | ✓ | ✓ | **PASS** (with depthmaps) | Inria/MPII GS (inherited); NEVER run submodule init here |
 | water-splatting | ✓ | ✓ | ✓ | ✓ | **PASS** (ns-train, 500 iters) | Apache-2.0; runs on ns 1.1.5 despite 1.1.4 README pin |
 | SeaFree-GS | ✓ | ✓ | ✓ | ✓ | **PASS** (ns-train, 500 iters; depth maps optional) | MIT |
 
@@ -63,8 +63,8 @@ kornia 0.8.2 · lpips 0.1.4 · dearpygui 2.3 · rawpy 0.27 · splines 0.3.0.
 
 ## Adaptations log
 
-(chronological; every source edit also exists as a commit on branch `cu124-shared-env`
-in the local clone and as a diff in `patches/`)
+(chronological; every source edit ships as a diff in `repro/patches/<repo>/`,
+applied on top of the pinned upstream commit by `repro/bootstrap.sh`)
 
 1. **Rasterizer package renames** (all repos, commit "Rename rasterizer package for
    shared cu124 env"): `git mv diff_gaussian_rasterization <new>` in each vendored/

@@ -1,0 +1,5 @@
+[
+  {"id": "_probe_m0", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s2_turbid0_trial1", "iters": 1000, "port": 6031},
+  {"id": "_probe_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s2_turbid0_trial1", "iters": 1000, "seathru_from": 300, "port": 6032},
+  {"id": "_probe_m2", "system": "watersplatting", "scene": "D:/uw3dgs/scenes/s1_curacao", "iters": 1000, "port": 6033}
+]

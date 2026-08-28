@@ -1,0 +1,6 @@
+[
+  {"id": "e2_t0_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s2_turbid0_trial1", "iters": 30000, "port": 6050, "border": 32},
+  {"id": "e2_t5_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s2_turbid5_trial1", "iters": 30000, "port": 6051, "border": 32},
+  {"id": "e2_t3_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1", "iters": 30000, "port": 6052, "border": 32},
+  {"id": "e3_t0colmap_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s2_turbid0_colmap", "iters": 30000, "port": 6053, "border": 32}
+]

@@ -1,0 +1,139 @@
+From 7d58a0be8ef27579394ed8f470c186991f8f1b7c Mon Sep 17 00:00:00 2001
+From: oateiva <oat@eiva.com>
+Date: Fri, 21 Aug 2026 23:28:43 +0200
+Subject: Rename rasterizer package for shared cu124 env (uw3dgs); patch
+ imports
+
+---
+ gaussian_renderer/__init__.py          | 2 +-
+ submodules/diff-gaussian-rasterization | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/gaussian_renderer/__init__.py b/gaussian_renderer/__init__.py
+index 17949fd..4defa3c 100755
+--- a/gaussian_renderer/__init__.py
++++ b/gaussian_renderer/__init__.py
+@@ -11,7 +11,7 @@
+ 
+ import torch
+ import math
+-from diff_gaussian_rasterization import GaussianRasterizationSettings, GaussianRasterizer
++from dgr_seasplat import GaussianRasterizationSettings, GaussianRasterizer
+ from scene.gaussian_model import GaussianModel
+ from utils.sh_utils import eval_sh
+ 
+diff --git a/submodules/diff-gaussian-rasterization b/submodules/diff-gaussian-rasterization
+index 729f6be..4782c07 160000
+--- a/submodules/diff-gaussian-rasterization
++++ b/submodules/diff-gaussian-rasterization
+@@ -1 +1 @@
+-Subproject commit 729f6be0a47b13eadc6fec4f2ee4cfdbb19aca75
++Subproject commit 4782c071623a57165abe4382601fdf029bf369ab
+
+From d65dfbea5907a7c209a4dac707e61f561ae8610c Mon Sep 17 00:00:00 2001
+From: oateiva <oat@eiva.com>
+Date: Sat, 22 Aug 2026 01:15:57 +0200
+Subject: metrics.py: use os.path.splitext, not split('.'), so image names
+ containing dots resolve to their ground-truth files
+
+---
+ metrics.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/metrics.py b/metrics.py
+index b90d098..55be82a 100644
+--- a/metrics.py
++++ b/metrics.py
+@@ -55,7 +55,7 @@ def readImages(renders_dir, gt_dir, fname_list=None):
+         fnames = fname_list
+ 
+     for fname in tqdm(fnames, desc="Reading image batch"):
+-        img_name = fname.split('.')[0]
++        img_name = os.path.splitext(fname)[0]
+         if os.path.exists(gt_dir / (img_name + ".png")):
+             gt = Image.open(gt_dir / (img_name + ".png"))
+         else:
+
+From eab703b0e42987e8898f760b41460f09cd3f102f Mon Sep 17 00:00:00 2001
+From: oateiva <oat@eiva.com>
+Date: Sat, 22 Aug 2026 11:05:52 +0200
+Subject: Add E4 ablation switches (abl_no_backscatter/A1, abl_no_depth_sup/A2,
+ abl_no_medium/A3); respect explicit -m model_path
+
+---
+ arguments/__init__.py |  5 +++++
+ train.py              | 19 ++++++++++++++-----
+ 2 files changed, 19 insertions(+), 5 deletions(-)
+
+diff --git a/arguments/__init__.py b/arguments/__init__.py
+index 7f6503c..2fdd18a 100644
+--- a/arguments/__init__.py
++++ b/arguments/__init__.py
+@@ -123,6 +123,11 @@ class OptimizationParams(ParamGroup):
+         self.alpha_bg_uw = False
+         self.turn_off_bg_loss = False
+ 
++        # E4 ablation switches (OCEANS study): all False = full SeaSplat (A0)
++        self.abl_no_backscatter = False       # A1: composite = direct only (B_inf term zeroed)
++        self.abl_no_depth_sup = False         # A2: disable depth smooth + depth-weighted recon losses
++        self.abl_no_medium = False            # A3: bypass medium composite; raw Gaussian colour to loss
++
+         # depth
+         self.use_gt_depth = False             # swap out rendered depth with pseudo ground truth depth
+         self.use_depth_l1_loss = False        # use l1 depth reconstruction loss
+diff --git a/train.py b/train.py
+index 8a50420..daeba43 100644
+--- a/train.py
++++ b/train.py
+@@ -270,7 +270,14 @@ def training(model_params, opt_params, pipe_params, testing_iterations, saving_i
+             backscatter_depth_detached = bs_model(depth_image_batch.detach())
+ 
+             # combined image
+-            underwater_image = torch.clamp(direct + backscatter, 0.0, 1.0)
++            # E4 ablations (OCEANS study): A1 zeroes the backscatter term only;
++            # A3 bypasses the medium composite entirely (raw Gaussian colour).
++            if opt_params.abl_no_medium:
++                underwater_image = torch.clamp(image_batch, 0.0, 1.0)
++            elif opt_params.abl_no_backscatter:
++                underwater_image = torch.clamp(direct, 0.0, 1.0)
++            else:
++                underwater_image = torch.clamp(direct + backscatter, 0.0, 1.0)
+ 
+         # gaussian splating loss
+         gt_image = viewpoint_cam.original_image.cuda()
+@@ -293,7 +300,7 @@ def training(model_params, opt_params, pipe_params, testing_iterations, saving_i
+         loss = (1.0 - opt_params.lambda_dssim) * Ll1 + opt_params.lambda_dssim * (1.0 - l_ssim)
+ 
+         # depth weighted l1
+-        if opt_params.add_recon_depth_l1:
++        if opt_params.add_recon_depth_l1 and not opt_params.abl_no_depth_sup:
+             if iteration > opt_params.seathru_from_iter and opt_params.do_seathru:
+                 dl1 = depth_weighted_l1_loss(underwater_image, gt_image, depth_image.detach())
+             else:
+@@ -331,13 +338,13 @@ def training(model_params, opt_params, pipe_params, testing_iterations, saving_i
+             loss += opt_params.bg_lambda * alpha_bg_loss
+ 
+         # depth l1 loss
+-        if opt_params.use_depth_l1_loss:
++        if opt_params.use_depth_l1_loss and not opt_params.abl_no_depth_sup:
+             gt_depth_image = viewpoint_cam.original_depth_image.cuda()
+             depth_l1_loss = l1_loss(depth_image, gt_depth_image)
+             loss += 0.1 * depth_l1_loss
+ 
+         # depth smooth loss
+-        if opt_params.use_depth_smooth_loss:
++        if opt_params.use_depth_smooth_loss and not opt_params.abl_no_depth_sup:
+             gt_rgb_batch = torch.unsqueeze(gt_image, dim=0)
+             depth_image_batch = torch.unsqueeze(depth_image, dim=0)
+             depth_smooth_loss = depth_smooth_criterion(gt_rgb_batch, depth_image_batch)
+@@ -1032,7 +1039,9 @@ if __name__ == "__main__":
+ 
+     now = datetime.now()
+     today = now.strftime("%m%d%Y")
+-    args.model_path = str(Path(args.source_path) / "experiments" / today / args.exp)
++    # respect an explicit -m/--model_path; only derive the date path when absent
++    if not args.model_path:
++        args.model_path = str(Path(args.source_path) / "experiments" / today / args.exp)
+     if not os.path.exists(args.model_path):
+         os.makedirs(args.model_path)
+ 

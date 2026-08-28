@@ -1,0 +1,4 @@
+[
+  {"id": "e2_t3_m2_r2", "system": "watersplatting", "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1", "iters": 30000, "border": 32, "extra": ["--machine.seed", "43"]},
+  {"id": "e2_t3_m2_r3", "system": "watersplatting", "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1", "iters": 30000, "border": 32, "extra": ["--machine.seed", "44"]}
+]

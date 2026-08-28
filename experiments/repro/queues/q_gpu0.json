@@ -1,0 +1,8 @@
+[
+  {"id": "e2_t0_m0", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s2_turbid0_trial1", "iters": 30000, "port": 6040, "border": 32},
+  {"id": "e2_t5_m0", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s2_turbid5_trial1", "iters": 30000, "port": 6041, "border": 32},
+  {"id": "e2_t3_m0", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1", "iters": 30000, "port": 6042, "border": 32},
+  {"id": "e2_t0_m2", "system": "watersplatting", "scene": "D:/uw3dgs/scenes/s2_turbid0_trial1", "iters": 30000, "border": 32},
+  {"id": "e2_t5_m2", "system": "watersplatting", "scene": "D:/uw3dgs/scenes/s2_turbid5_trial1", "iters": 30000, "border": 32},
+  {"id": "e2_t3_m2", "system": "watersplatting", "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1", "iters": 30000, "border": 32}
+]

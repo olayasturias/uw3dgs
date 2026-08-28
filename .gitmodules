@@ -1,0 +1,32 @@
+# Method repositories, pinned to the exact upstream commits used for the study.
+# Nothing from these repos is vendored here: a submodule records only a URL and a
+# commit id. Local adaptations live as diffs in experiments/repro/patches/.
+#
+# Do NOT run `git submodule update --init --recursive`. Several of these repos
+# vendor SIBR_viewers (huge, unnecessary) and RUSplatting's .gitmodules is wrong.
+# Use experiments/repro/bootstrap.sh, which initialises only what is needed.
+
+[submodule "methods/gaussian-splatting"]
+	path = methods/gaussian-splatting
+	url = https://github.com/graphdeco-inria/gaussian-splatting.git
+[submodule "methods/seasplat"]
+	path = methods/seasplat
+	url = https://github.com/dxyang/seasplat.git
+[submodule "methods/recgs"]
+	path = methods/recgs
+	url = https://github.com/tyz1030/recgs.git
+[submodule "methods/water-splatting"]
+	path = methods/water-splatting
+	url = https://github.com/water-splatting/water-splatting.git
+[submodule "methods/UW-GS"]
+	path = methods/UW-GS
+	url = https://github.com/WangHaoran16/UW-GS.git
+[submodule "methods/3D-UIR"]
+	path = methods/3D-UIR
+	url = https://github.com/bilityniu/3D-UIR.git
+[submodule "methods/RUSplatting"]
+	path = methods/RUSplatting
+	url = https://github.com/theflash987/RUSplatting.git
+[submodule "methods/SeaFree-GS"]
+	path = methods/SeaFree-GS
+	url = https://github.com/deng-ai-lab/SeaFree-GS.git

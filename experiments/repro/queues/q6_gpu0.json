@@ -1,0 +1,6 @@
+[
+  {"id": "e2_t3_m3_capped", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1", "iters": 30000, "port": 6095, "border": 32,
+   "extra": ["--densify_grad_threshold", "0.0004"],
+   "_note": "PROTOCOL DEVIATION (footnote): densify threshold 2x default; default config exceeds 24 GB at 7 NTU twice"},
+  {"id": "e1_s1_m4_retry", "system": "uwgs", "scene": "D:/uw3dgs/scenes/s1_curacao", "iters": 30000, "port": 6090}
+]

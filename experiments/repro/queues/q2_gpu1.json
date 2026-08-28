@@ -1,0 +1,10 @@
+[
+  {"id": "e2_t3_m3_retry", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1", "iters": 30000, "port": 6069, "border": 32},
+  {"id": "e1_s1_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s1_curacao", "iters": 30000, "port": 6070},
+  {"id": "e4_a1_s1", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s1_curacao", "iters": 30000, "port": 6071, "extra": ["--abl_no_backscatter"]},
+  {"id": "e4_a2_s1", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s1_curacao", "iters": 30000, "port": 6072, "extra": ["--abl_no_depth_sup"]},
+  {"id": "e4_a3_s1", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s1_curacao", "iters": 30000, "port": 6073, "extra": ["--abl_no_medium"]},
+  {"id": "e1_s4_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s4_planenose", "iters": 30000, "port": 6074},
+  {"id": "e5_s3_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s3_eiffel2015_dense", "iters": 30000, "port": 6075},
+  {"id": "e6_lin_s1_m3", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s1_curacao_linear", "iters": 30000, "port": 6076}
+]

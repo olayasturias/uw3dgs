@@ -1,0 +1,5 @@
+[
+  {"id": "e2_t2_m3_capped", "system": "seasplat", "scene": "D:/uw3dgs/scenes/s2_turbid2_trial1", "iters": 30000, "port": 6130, "border": 32,
+   "extra": ["--densify_grad_threshold", "0.0004"],
+   "_note": "same dagger-capped config as e2_t3_m3_capped (default exceeds 24 GB at mid-turbidity)"}
+]

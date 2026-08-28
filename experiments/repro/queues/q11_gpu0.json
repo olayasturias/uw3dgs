@@ -1,0 +1,6 @@
+[
+  {"id": "e2_t0_m1", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s2_turbid0_uie", "iters": 30000, "port": 6110, "border": 32},
+  {"id": "e2_t2_m1", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s2_turbid2_uie", "iters": 30000, "port": 6111, "border": 32},
+  {"id": "e2_t3_m1", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s2_turbid3_uie", "iters": 30000, "port": 6112, "border": 32},
+  {"id": "e2_t5_m1", "system": "3dgs", "scene": "D:/uw3dgs/scenes/s2_turbid5_uie", "iters": 30000, "port": 6113, "border": 32}
+]

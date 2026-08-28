@@ -1,0 +1,11 @@
+# Patches must round-trip byte-for-byte or `git apply` fails. This repo is
+# developed on Windows with core.autocrlf=true, which would otherwise rewrite
+# their line endings on checkout.
+*.patch  -text
+*.diff   -text
+
+# POSIX scripts must keep LF or /bin/sh chokes on the CR.
+*.sh     text eol=lf
+
+# Point clouds and thumbnails on the project page.
+*.ply    binary
