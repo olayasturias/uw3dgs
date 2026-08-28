@@ -26,7 +26,9 @@ if [ "$(git config --get core.longpaths)" != "true" ]; then
 fi
 
 echo "== 1/3  top-level method repos at pinned commits =="
-git submodule update --init --depth 1 -- \
+# NOT --depth 1: the pinned commits are older than current upstream HEAD, and
+# a shallow fetch of the branch tip would not contain them.
+git submodule update --init -- \
   methods/gaussian-splatting methods/seasplat methods/recgs \
   methods/water-splatting methods/UW-GS methods/3D-UIR \
   methods/RUSplatting methods/SeaFree-GS
