@@ -1,0 +1,11 @@
+{
+  "id": "e1_s1_m4",
+  "system": "uwgs",
+  "scene": "D:/uw3dgs/scenes/s1_curacao",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 4007.8088898658752,
+  "status": "TRAIN_FAILED",
+  "finished_at": "2026-08-22 18:30:12"
+}

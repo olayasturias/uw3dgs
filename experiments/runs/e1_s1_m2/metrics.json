@@ -1,0 +1,33 @@
+{
+  "renders_dir": "D:\\uw3dgs\\runs\\e1_s1_m2\\ns_render\\test\\rgb",
+  "gt_dir": "D:\\uw3dgs\\runs\\e1_s1_m2\\ns_render\\test\\gt-rgb",
+  "n_views": 3,
+  "border_crop_px": 0,
+  "renders_resized_to_gt": false,
+  "aggregate": {
+    "psnr": 29.47341473897298,
+    "ssim": 0.9190719723701477,
+    "lpips_alex": 0.14134581635395685,
+    "lpips_vgg": 0.21589397639036179
+  },
+  "per_view": {
+    "MTN_1289": {
+      "psnr": 21.706710815429688,
+      "ssim": 0.8856885433197021,
+      "lpips_alex": 0.17853446304798126,
+      "lpips_vgg": 0.24102166295051575
+    },
+    "MTN_1297": {
+      "psnr": 34.74324417114258,
+      "ssim": 0.9649664759635925,
+      "lpips_alex": 0.07296016067266464,
+      "lpips_vgg": 0.12341094762086868
+    },
+    "MTN_1308": {
+      "psnr": 31.97028923034668,
+      "ssim": 0.9065608978271484,
+      "lpips_alex": 0.17254282534122467,
+      "lpips_vgg": 0.2832493185997009
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "ntu_0.0": {
+    "trivial_median_psnr_mean": 24.101134490248306,
+    "n_test": 25,
+    "n_train": 168
+  },
+  "ntu_7.0": {
+    "trivial_median_psnr_mean": 32.03119607293741,
+    "n_test": 25,
+    "n_train": 168
+  },
+  "ntu_12.0": {
+    "trivial_median_psnr_mean": 31.68203381698693,
+    "n_test": 25,
+    "n_train": 168
+  },
+  "ntu_6.0": {
+    "trivial_median_psnr_mean": 31.538632531063275,
+    "n_test": 25,
+    "n_train": 168
+  }
+}

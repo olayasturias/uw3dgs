@@ -1,0 +1,20 @@
+{
+  "id": "e4_a3_s1",
+  "system": "seasplat",
+  "scene": "D:/uw3dgs/scenes/s1_curacao",
+  "gpu": 1,
+  "iters": 30000,
+  "extra": [
+    "--abl_no_medium"
+  ],
+  "train_s": 4377.77378153801,
+  "metrics": {
+    "psnr": 23.97645632425944,
+    "ssim": 0.8654463291168213,
+    "lpips_alex": 0.22501325607299805,
+    "lpips_vgg": 0.2874624828497569
+  },
+  "n_gaussians": 1579410,
+  "status": "OK",
+  "finished_at": "2026-08-23 08:45:54"
+}

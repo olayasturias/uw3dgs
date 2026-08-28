@@ -1,0 +1,18 @@
+{
+  "id": "e5_s3_m0",
+  "system": "3dgs",
+  "scene": "D:/uw3dgs/scenes/s3_eiffel2015",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 2234.4969415664673,
+  "metrics": {
+    "psnr": 16.50441785959097,
+    "ssim": 0.6047890950471927,
+    "lpips_alex": 0.6389051660513266,
+    "lpips_vgg": 0.557702409915435
+  },
+  "n_gaussians": 350955,
+  "status": "OK",
+  "finished_at": "2026-08-22 16:06:46"
+}

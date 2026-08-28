@@ -1,0 +1,16 @@
+{
+  "n_model_pts": 64656,
+  "n_ref_covisible": 2522780,
+  "icp_fitness": 0.7109626330116308,
+  "icp_rmse_mm": 34.408220755216796,
+  "icp_translation_mm": 16.526894991362127,
+  "accuracy_mm": {
+    "mean": 639.2513514469205,
+    "median": 15.735659464412487
+  },
+  "completeness_mm": {
+    "mean": 99.0559818888321,
+    "median": 60.19756810439578
+  },
+  "chamfer_mm": 369.1536666678763
+}

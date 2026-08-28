@@ -1,0 +1,11 @@
+{
+  "id": "e2_t3_m3",
+  "system": "seasplat",
+  "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1",
+  "gpu": 1,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 12856.671256303787,
+  "status": "TRAIN_FAILED",
+  "finished_at": "2026-08-22 22:23:18"
+}

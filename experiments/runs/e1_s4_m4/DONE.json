@@ -1,0 +1,11 @@
+{
+  "id": "e1_s4_m4",
+  "system": "uwgs",
+  "scene": "D:/uw3dgs/scenes/s4_planenose",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 48844.42807984352,
+  "status": "TRAIN_FAILED",
+  "finished_at": "2026-08-23 08:04:17"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "e1_s4_m3",
+  "system": "seasplat",
+  "scene": "D:/uw3dgs/scenes/s4_planenose",
+  "gpu": 1,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 21206.548959732056,
+  "metrics": {
+    "psnr": 24.669429886508997,
+    "ssim": 0.7442956978166607,
+    "lpips_alex": 0.5830972228251713,
+    "lpips_vgg": 0.5296246741019505
+  },
+  "n_gaussians": 163776,
+  "status": "OK",
+  "finished_at": "2026-08-23 14:39:42"
+}

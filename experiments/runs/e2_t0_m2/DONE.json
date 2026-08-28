@@ -1,0 +1,19 @@
+{
+  "id": "e2_t0_m2",
+  "system": "watersplatting",
+  "scene": "D:/uw3dgs/scenes/s2_turbid0_trial1",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 2483.270243167877,
+  "metrics": {
+    "psnr": 32.86829109191895,
+    "ssim": 0.9013637709617615,
+    "lpips_alex": 0.4366385614871979,
+    "lpips_vgg": 0.5285135579109191
+  },
+  "n_gaussians": 154097,
+  "status": "OK",
+  "finished_at": "2026-08-22 13:23:25",
+  "n_gaussians_source": "backfilled from converted point_cloud.ply (ns ckpt); was None"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "e5_s3dense_m2",
+  "system": "watersplatting",
+  "scene": "D:/uw3dgs/scenes/s3_eiffel2015_dense",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 1765.8258097171783,
+  "metrics": {
+    "psnr": 23.222594781355426,
+    "ssim": 0.7311899662017822,
+    "lpips_alex": 0.48300073566761886,
+    "lpips_vgg": 0.45917935398491944
+  },
+  "n_gaussians": 27479,
+  "status": "OK",
+  "finished_at": "2026-08-24 11:16:23",
+  "n_gaussians_source": "backfilled from converted point_cloud.ply (ns ckpt); was None"
+}

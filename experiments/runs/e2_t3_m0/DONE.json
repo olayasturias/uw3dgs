@@ -1,0 +1,18 @@
+{
+  "id": "e2_t3_m0",
+  "system": "3dgs",
+  "scene": "D:/uw3dgs/scenes/s2_turbid3_trial1",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 1706.3354651927948,
+  "metrics": {
+    "psnr": 35.9373957824707,
+    "ssim": 0.9135546684265137,
+    "lpips_alex": 0.4522605586051941,
+    "lpips_vgg": 0.5710067319869995
+  },
+  "n_gaussians": 22761,
+  "status": "OK",
+  "finished_at": "2026-08-22 12:41:29"
+}

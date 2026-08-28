@@ -1,0 +1,33 @@
+{
+  "renders_dir": "D:\\uw3dgs\\runs\\e4_a2_s1\\test\\with_water",
+  "gt_dir": "D:\\uw3dgs\\scenes\\s1_curacao\\images",
+  "n_views": 3,
+  "border_crop_px": 0,
+  "renders_resized_to_gt": false,
+  "aggregate": {
+    "psnr": 27.45812924702962,
+    "ssim": 0.8814817269643148,
+    "lpips_alex": 0.2147740125656128,
+    "lpips_vgg": 0.3067360023657481
+  },
+  "per_view": {
+    "MTN_1288": {
+      "psnr": 19.429452896118164,
+      "ssim": 0.8291106224060059,
+      "lpips_alex": 0.3079376220703125,
+      "lpips_vgg": 0.3929106295108795
+    },
+    "MTN_1296": {
+      "psnr": 31.23021697998047,
+      "ssim": 0.9154146909713745,
+      "lpips_alex": 0.1441081464290619,
+      "lpips_vgg": 0.22015613317489624
+    },
+    "MTN_1304": {
+      "psnr": 31.714717864990234,
+      "ssim": 0.899919867515564,
+      "lpips_alex": 0.192276269197464,
+      "lpips_vgg": 0.3071412444114685
+    }
+  }
+}

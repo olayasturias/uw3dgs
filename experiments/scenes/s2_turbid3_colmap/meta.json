@@ -1,0 +1,12 @@
+{
+  "level_dir": 3,
+  "images_total": 193,
+  "registered": 2,
+  "registration_rate": 0.010362694300518135,
+  "largest_model": "D:\\uw3dgs\\scenes\\s2_turbid3_colmap\\sparse\\0",
+  "mapper_rc": 0,
+  "sift_peak": 0.001,
+  "sift_edge": 16.0,
+  "note": "free SfM on identical undistorted images; intrinsics fixed to calibration",
+  "images_dir": "D:\\uw3dgs\\scenes\\s2_turbid3_trial1\\images"
+}

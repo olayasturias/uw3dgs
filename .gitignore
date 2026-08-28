@@ -1,0 +1,4 @@
+data/*.pdf
+pdfs/*.pdf
+data/awesome_3dgs_papers.yaml
+__pycache__/

@@ -1,0 +1,19 @@
+{
+  "id": "e1_s1_m2",
+  "system": "watersplatting",
+  "scene": "D:/uw3dgs/scenes/s1_curacao",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 2405.225765943527,
+  "metrics": {
+    "psnr": 29.47341473897298,
+    "ssim": 0.9190719723701477,
+    "lpips_alex": 0.14134581635395685,
+    "lpips_vgg": 0.21589397639036179
+  },
+  "n_gaussians": 1057396,
+  "status": "OK",
+  "finished_at": "2026-08-22 16:47:16",
+  "n_gaussians_source": "backfilled from converted point_cloud.ply (ns ckpt); was None"
+}

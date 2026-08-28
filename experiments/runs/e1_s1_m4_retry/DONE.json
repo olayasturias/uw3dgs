@@ -1,0 +1,18 @@
+{
+  "id": "e1_s1_m4_retry",
+  "system": "uwgs",
+  "scene": "D:/uw3dgs/scenes/s1_curacao",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 11256.502645015717,
+  "metrics": {
+    "psnr": 30.627395629882812,
+    "ssim": 0.8978375991185507,
+    "lpips_alex": 0.17872032026449838,
+    "lpips_vgg": 0.2730251948038737
+  },
+  "n_gaussians": 926307,
+  "status": "OK",
+  "finished_at": "2026-08-24 00:20:57"
+}

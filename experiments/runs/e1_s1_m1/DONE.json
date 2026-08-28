@@ -1,0 +1,18 @@
+{
+  "id": "e1_s1_m1",
+  "system": "3dgs",
+  "scene": "D:/uw3dgs/scenes/s1_curacao_uie",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 4172.4669489860535,
+  "metrics": {
+    "psnr": 25.035820643107098,
+    "ssim": 0.8067589998245239,
+    "lpips_alex": 0.250630463163058,
+    "lpips_vgg": 0.32881882786750793
+  },
+  "n_gaussians": 1339892,
+  "status": "OK",
+  "finished_at": "2026-08-23 09:14:07"
+}

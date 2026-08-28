@@ -1,0 +1,12 @@
+{
+  "dataset": "EIVA plane_nose",
+  "n_images": 566,
+  "resolution": [
+    1408,
+    1408
+  ],
+  "scale_from_native": 0.5,
+  "pose_source": "pose_gt.txt (XMP extrinsics, w2c_direct)",
+  "reference_cloud": "D:\\Datasets\\EIVA\\vobster_quay\\plane_nose\\pointcloud_gt.ply",
+  "note": "init cloud triangulated, NOT seeded from reference"
+}

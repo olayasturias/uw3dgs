@@ -1,0 +1,18 @@
+{
+  "id": "e5_s3dense_m0",
+  "system": "3dgs",
+  "scene": "D:/uw3dgs/scenes/s3_eiffel2015_dense",
+  "gpu": 1,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 2583.312525510788,
+  "metrics": {
+    "psnr": 27.02991112795743,
+    "ssim": 0.890654905275865,
+    "lpips_alex": 0.1930670958351005,
+    "lpips_vgg": 0.26416775889017363
+  },
+  "n_gaussians": 1914644,
+  "status": "OK",
+  "finished_at": "2026-08-23 18:47:30"
+}

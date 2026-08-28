@@ -1,0 +1,18 @@
+{
+  "id": "e6_lin_s1_m3",
+  "system": "seasplat",
+  "scene": "D:/uw3dgs/scenes/s1_curacao_linear",
+  "gpu": 1,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 4044.2799813747406,
+  "metrics": {
+    "psnr": 33.56437110900879,
+    "ssim": 0.9285470048586527,
+    "lpips_alex": 0.13645397871732712,
+    "lpips_vgg": 0.24520564079284668
+  },
+  "n_gaussians": 2332679,
+  "status": "OK",
+  "finished_at": "2026-08-23 17:34:15"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "e2_t5_m3",
+  "system": "seasplat",
+  "scene": "D:/uw3dgs/scenes/s2_turbid5_trial1",
+  "gpu": 1,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 20470.735092163086,
+  "metrics": {
+    "psnr": 28.131663818359375,
+    "ssim": 0.8945728206634521,
+    "lpips_alex": 0.48545916080474855,
+    "lpips_vgg": 0.6038646030426026
+  },
+  "n_gaussians": 281609,
+  "status": "OK",
+  "finished_at": "2026-08-22 18:49:01"
+}

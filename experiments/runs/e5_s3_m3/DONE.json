@@ -1,0 +1,18 @@
+{
+  "id": "e5_s3_m3",
+  "system": "seasplat",
+  "scene": "D:/uw3dgs/scenes/s3_eiffel2015_dense",
+  "gpu": 1,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 6401.426653385162,
+  "metrics": {
+    "psnr": 25.927326635880902,
+    "ssim": 0.869776418263262,
+    "lpips_alex": 0.226558963006193,
+    "lpips_vgg": 0.3026827018369328
+  },
+  "n_gaussians": 1986275,
+  "status": "OK",
+  "finished_at": "2026-08-23 16:26:43"
+}

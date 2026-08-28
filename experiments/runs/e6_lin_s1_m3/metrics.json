@@ -1,0 +1,33 @@
+{
+  "renders_dir": "D:\\uw3dgs\\runs\\e6_lin_s1_m3\\test\\with_water",
+  "gt_dir": "D:\\uw3dgs\\scenes\\s1_curacao_linear\\images",
+  "n_views": 3,
+  "border_crop_px": 0,
+  "renders_resized_to_gt": false,
+  "aggregate": {
+    "psnr": 33.56437110900879,
+    "ssim": 0.9285470048586527,
+    "lpips_alex": 0.13645397871732712,
+    "lpips_vgg": 0.24520564079284668
+  },
+  "per_view": {
+    "MTN_1288": {
+      "psnr": 29.831335067749023,
+      "ssim": 0.8824092745780945,
+      "lpips_alex": 0.17978033423423767,
+      "lpips_vgg": 0.29384416341781616
+    },
+    "MTN_1296": {
+      "psnr": 34.552242279052734,
+      "ssim": 0.9630123376846313,
+      "lpips_alex": 0.07414913922548294,
+      "lpips_vgg": 0.1758119761943817
+    },
+    "MTN_1304": {
+      "psnr": 36.30953598022461,
+      "ssim": 0.9402194023132324,
+      "lpips_alex": 0.15543246269226074,
+      "lpips_vgg": 0.26596078276634216
+    }
+  }
+}

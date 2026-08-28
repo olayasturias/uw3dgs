@@ -1,0 +1,18 @@
+{
+  "id": "e3_t0colmap_m3",
+  "system": "seasplat",
+  "scene": "D:/uw3dgs/scenes/s2_turbid0_colmap",
+  "gpu": 1,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 5305.029792070389,
+  "metrics": {
+    "psnr": 28.299557606379192,
+    "ssim": 0.8836831351121267,
+    "lpips_alex": 0.5331551482280096,
+    "lpips_vgg": 0.6027154251933098
+  },
+  "n_gaussians": 129409,
+  "status": "OK",
+  "finished_at": "2026-08-22 23:51:56"
+}

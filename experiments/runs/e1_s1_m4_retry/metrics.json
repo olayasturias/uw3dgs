@@ -1,0 +1,33 @@
+{
+  "renders_dir": "D:\\uw3dgs\\runs\\e1_s1_m4_retry\\test\\ours_30000\\renders",
+  "gt_dir": "D:\\uw3dgs\\runs\\e1_s1_m4_retry\\test\\ours_30000\\gt",
+  "n_views": 3,
+  "border_crop_px": 0,
+  "renders_resized_to_gt": false,
+  "aggregate": {
+    "psnr": 30.627395629882812,
+    "ssim": 0.8978375991185507,
+    "lpips_alex": 0.17872032026449838,
+    "lpips_vgg": 0.2730251948038737
+  },
+  "per_view": {
+    "00000": {
+      "psnr": 27.270366668701172,
+      "ssim": 0.8611270785331726,
+      "lpips_alex": 0.23890212178230286,
+      "lpips_vgg": 0.3499104380607605
+    },
+    "00001": {
+      "psnr": 33.286346435546875,
+      "ssim": 0.9235243201255798,
+      "lpips_alex": 0.1258247196674347,
+      "lpips_vgg": 0.19817417860031128
+    },
+    "00002": {
+      "psnr": 31.32547378540039,
+      "ssim": 0.9088613986968994,
+      "lpips_alex": 0.17143411934375763,
+      "lpips_vgg": 0.2709909677505493
+    }
+  }
+}

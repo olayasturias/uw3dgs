@@ -1,0 +1,18 @@
+{
+  "id": "e1_s4_m0",
+  "system": "3dgs",
+  "scene": "D:/uw3dgs/scenes/s4_planenose",
+  "gpu": 0,
+  "iters": 30000,
+  "extra": [],
+  "train_s": 1676.1291909217834,
+  "metrics": {
+    "psnr": 25.940890782315964,
+    "ssim": 0.7796926674708514,
+    "lpips_alex": 0.5086277714917358,
+    "lpips_vgg": 0.49492060466551446
+  },
+  "n_gaussians": 239424,
+  "status": "OK",
+  "finished_at": "2026-08-22 15:28:18"
+}

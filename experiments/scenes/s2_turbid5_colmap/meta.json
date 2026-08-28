@@ -1,0 +1,12 @@
+{
+  "level_dir": 5,
+  "images_total": 193,
+  "registered": 0,
+  "registration_rate": 0.0,
+  "largest_model": "None",
+  "mapper_rc": 1,
+  "sift_peak": 0.0005,
+  "sift_edge": 20.0,
+  "note": "free SfM on identical undistorted images; intrinsics fixed to calibration",
+  "images_dir": "D:\\uw3dgs\\scenes\\s2_turbid5_trial1\\images"
+}

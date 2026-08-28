@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Does "Underwater" Buy? — Controlled Evaluation of Underwater Gaussian Splatting</title>
+<meta name="description" content="A controlled cross-regime evaluation and component ablation of medium-aware 3D Gaussian splatting on subsea survey data.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<style>
+  body { font-family: 'Google Sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .publication-title { font-size: 2rem; font-weight: 700; }
+  .publication-authors { font-size: 1.15rem; }
+  .publication-authors a { color: #3273dc; }
+  .link-btn { margin: 0.15rem; border-radius: 9999px; }
+  .teaser-caption, .figure-caption { font-size: 0.9rem; color: #4a4a4a; max-width: 860px; margin: 0.75rem auto 0; }
+  #viewer-wrap { position: relative; width: 100%; max-width: 960px; margin: 0 auto;
+                 background: #101318; border-radius: 10px; overflow: hidden; }
+  #viewer { width: 100%; height: 520px; display: block; }
+  #viewer-hint { position: absolute; top: 10px; left: 12px; color: #cfd6e4;
+                 font-size: 0.8rem; background: rgba(16,19,24,0.55); padding: 2px 10px;
+                 border-radius: 9999px; pointer-events: none; }
+  #viewer-stats { position: absolute; bottom: 10px; right: 12px; color: #8a93a6; font-size: 0.75rem; }
+  .model-btn { cursor: pointer; border: 2px solid transparent; border-radius: 8px;
+               overflow: hidden; padding: 0; background: #101318; }
+  .model-btn img { display: block; width: 132px; height: 99px; object-fit: cover; }
+  .model-btn.active { border-color: #3273dc; }
+  .model-btn figcaption { color: #cfd6e4; font-size: 0.66rem; padding: 3px 5px 5px; max-width: 132px; }
+  .bibtex { background: #f5f5f5; border-radius: 8px; padding: 1rem; font-size: 0.85rem;
+            white-space: pre; overflow-x: auto; text-align: left; }
+  .finding-num { font-weight: 700; color: #3273dc; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="publication-title">Gaussian Splatting Underwater:<br>
+        A Controlled Cross-Regime Study</h1>
+      <div class="publication-authors mt-4">
+        <span><a href="https://github.com/olayasturias">Olaya &Aacute;lvarez-Tu&ntilde;&oacute;n</a></span>,
+        <span>Stella Gra&szlig;hof</span>
+      </div>
+      <div class="is-size-6 mt-1">EIVA a/s &middot; <a href="https://arxiv.org/abs/2608.25483">arXiv:2608.25483</a></div>
+      <div class="mt-4">
+        <a class="button is-dark link-btn" href="https://arxiv.org/abs/2608.25483">&#128196; Paper (arXiv)</a>
+        <a class="button is-dark link-btn" href="https://github.com/olayasturias/uw3dgs">&#128187; Code &amp; Results</a>
+        <a class="button is-dark link-btn" href="https://github.com/olayasturias/uw3dgs/tree/master/experiments">&#128202; Run Artifacts</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title is-4">Interactive Gaussian point clouds</h2>
+    <p class="teaser-caption mb-4" style="margin-top:-0.25rem;">
+      Each cloud is extracted directly from a trained 3DGS model: every Gaussian
+      contributes one point at its centre, coloured by its base (SH degree-0)
+      colour. Gaussians with opacity below 0.2 are dropped, clouds larger than
+      250&thinsp;k points are randomly subsampled, and each cloud is centred and
+      scaled by its robust (95th-percentile) radius for viewing. What you see is
+      therefore the model's <em>geometry</em> as the optimiser committed it &mdash;
+      including floaters and fabricated medium &mdash; not a rendered image.
+    </p>
+    <div class="tabs is-toggle is-centered is-small mb-3">
+      <ul id="dataset-tabs"></ul>
+    </div>
+    <div id="viewer-wrap">
+      <canvas id="viewer"></canvas>
+      <div id="viewer-hint">drag to rotate &middot; scroll to zoom &middot; right-drag to pan</div>
+      <div id="viewer-stats"></div>
+    </div>
+    <div id="model-buttons" class="is-flex is-flex-wrap-wrap is-justify-content-center mt-3" style="gap:8px;"></div>
+    <div id="model-comment" class="teaser-caption" style="min-height:3.2em;"></div>
+  </div>
+</section>
+
+<section class="section pt-2">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">Abstract</h2>
+    <p style="text-align: justify;">
+      Underwater adaptations of 3D Gaussian splatting add medium models, depth priors and backscatter terms,
+      and report their gains almost exclusively as held-out PSNR. We evaluate five code-available systems under
+      one controlled protocol &mdash; shared poses, initialisation, budget and evaluator &mdash; across four regimes:
+      the field's default shallow benchmark, a tank with measured turbidity and encoder ground-truth poses, a deep
+      vent under co-moving ROV light, and an industrial survey with a metric photogrammetric reference. Turbidity
+      saturates PSNR itself (a static median image gains more from murky water than any model), the classical SfM
+      the field initialises from collapses from 99.5&thinsp;% to 0&thinsp;% registration between 0 and 12&thinsp;NTU,
+      and on the benchmark the correlation between PSNR rank and geometric cleanliness is <em>positive</em>
+      (&rho;&nbsp;=&nbsp;+0.70): the better a system scores, the more floating opacity it carries. A component ablation
+      shows the underwater machinery buys appearance, not geometry &mdash; and a plain restore-then-splat baseline
+      produces the best surfaces on the operational scene in 27 minutes.
+    </p>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title is-4">Held-out renders across the four regimes</h2>
+    <img src="assets/fig_qual.png" alt="Qualitative grid: ground truth vs M0/M2/M3 across four regimes" style="max-width:100%; border-radius:8px;">
+    <p class="figure-caption">Ground truth beside vanilla 3DGS (M0), WaterSplatting (M2) and SeaSplat (M3) on one held-out
+      view per regime. On the benchmark all systems are near-indistinguishable; at 12&thinsp;NTU every system renders fog;
+      under co-moving light the medium-blind baseline wins; on the survey scene the benchmark leader is visibly hazier.</p>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title is-4">Turbidity dose&ndash;response</h2>
+    <img src="assets/fig2_dose_response.png" alt="PSNR rises with turbidity while surface error collapses" style="max-width:460px; width:100%; border-radius:8px;">
+    <p class="figure-caption">Identical trajectory, encoder ground-truth poses, shared initialisation; only measured
+      turbidity varies. PSNR (top) rises while surface depth error against an independent stereo reference (bottom)
+      grows by up to 8.5&times;; the medium-blind/medium-aware error curves cross below 6&thinsp;NTU.</p>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">Findings at a glance</h2>
+    <div class="content">
+      <ul>
+        <li><span class="finding-num">Registration cliff.</span> COLMAP registers 99.5&thinsp;% of frames at 0&thinsp;NTU,
+            1.0&thinsp;% at 7, 0.0&thinsp;% at 12 &mdash; a cliff, not a slope, and every published benchmark sits below it.</li>
+        <li><span class="finding-num">PSNR saturates.</span> A per-pixel median of the training images gains +7.5&thinsp;dB
+            from turbidity; every model's margin over it shrinks as water worsens.</li>
+        <li><span class="finding-num">Three failure mechanisms.</span> Vanilla splatting reconstructs haze as a solid;
+            a separate medium field absorbs the scene (154&thinsp;k&nbsp;&rarr;&nbsp;3.1&thinsp;k gaussians);
+            per-gaussian analytic models densify until 24&thinsp;GB of VRAM saturates.</li>
+        <li><span class="finding-num">Rank inversion.</span> The benchmark's PSNR leader is last on both axes of the
+            operational survey scene; a fixed 2D restoration pre-pass + stock 3DGS wins its geometry (45&thinsp;mm chamfer).</li>
+        <li><span class="finding-num">Medium parameters aren't water properties.</span> They flip off under linearised input
+            (&minus;6&thinsp;dB, veil moves into the gaussians), lose 9&thinsp;dB across sites, and partly memorise the
+            particulate realisation (exposed by replaying an identical trajectory in freshly mixed water).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">Reproduce</h2>
+    <div class="content">
+      <p>Everything behind the paper is in the <a href="https://github.com/olayasturias/uw3dgs">repository</a>:
+      <code>experiments/runs/</code> holds every run's metrics, geometry evaluations and floater sweeps;
+      <code>experiments/scenes/</code> the scene provenance (pose conventions, measured NTU);
+      <code>experiments/tools/</code> the full pipeline &mdash; scene builders, the unified evaluator, the run driver
+      and every figure generator. <code>experiments/SETUP.md</code> documents the shared environment and each
+      upstream code fix; <code>experiments/DATA.md</code> lists the datasets
+      (SeaThru-NeRF, <a href="https://gitlab.com/apl-ocean-engineering/public_datasets/sotrue">SOTRUE</a>,
+      Eiffel Tower) and how each scene was built.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4 has-text-centered">BibTeX</h2>
+    <div class="bibtex">@misc{alvareztunon2026gaussian,
+  title         = {Gaussian Splatting Underwater: A Controlled Cross-Regime Study},
+  author        = {{\'A}lvarez-Tu{\~n}{\'o}n, Olaya and Gra{\ss}hof, Stella},
+  year          = {2026},
+  eprint        = {2608.25483},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV}
+}</div>
+  </div>
+</section>
+
+<footer class="footer py-5">
+  <div class="content has-text-centered is-size-7">
+    Page template inspired by the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> academic project page.
+    Point clouds are downsampled gaussian centres from the actual trained models; full-resolution models load in
+    <a href="https://superspl.at/editor">SuperSplat</a>.
+  </div>
+</footer>
+
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { PLYLoader } from 'three/addons/loaders/PLYLoader.js';
+
+const DATASETS = [
+  { name: 'S1 · SeaThru-NeRF (Curaçao reef)',
+    blurb: 'Shallow sunlit reef, clear tropical water. The rendered views of all four systems look almost identical \u2014 the point clouds show where they actually differ.',
+    methods: [
+      ['M0 · 3DGS',           's1_benchmark_M0_3dgs',
+       'The reef itself is well-formed, but tilt to a grazing angle and a loose halo of drifting points hangs above the seabed \u2014 the blue veil, explained as translucent matter parked in the water column.'],
+      ['M2 · WaterSplatting', 's1_benchmark_M2_watersplatting',
+       'The cleanest cloud on this scene: the water lives in a separate volumetric field, so nearly every point sits on coral or sand. Rotate around it \u2014 the space above the reef is genuinely empty.'],
+      ['M3 · SeaSplat',       's1_benchmark_M3_seasplat',
+       'A dense reef wrapped in a shell of floating points. Orbit sideways and the wrapping becomes obvious: much of what this model committed to space is veil, not scene \u2014 and it is exactly what makes its renders look so good.'],
+      ['M4 · UW-GS',          's1_benchmark_M4_uwgs',
+       'The best-looking renders of the benchmark come from this cloud \u2014 in which more than half of the committed matter floats free of any surface. Look between the camera side and the reef: the fog is part of the model.'] ],
+    start: 2 },
+  { name: 'S2 · SOTRUE tank (clear water)',
+    blurb: 'A controlled testbed tank scanned along a servo-driven trajectory. In clear water every system recovers the tank \u2014 compare how crisply each one commits to the actual surfaces.',
+    methods: [
+      ['M0 · 3DGS',           's2_clear0NTU_M0_3dgs',
+       'Sparse but sharply placed: points hug the tank structure with almost nothing in between. This is the crispest surface any system produced in the study.'],
+      ['M2 · WaterSplatting', 's2_clear0NTU_M2_watersplatting',
+       'Denser and softer than M0: surfaces are all there, but edges blur slightly where the medium field and the splats negotiate who explains what.'],
+      ['M3 · SeaSplat',       's2_clear0NTU_M3_seasplat',
+       'The tank emerges, but with structure smeared along the viewing directions \u2014 the depth losses pull points into compromise positions even with no water to model.'] ],
+    start: 0 },
+  { name: 'S3 · Eiffel Tower vent (IFREMER)',
+    blurb: 'A deep hydrothermal vent lit only by the ROV\u2019s own lamps \u2014 the light moves with the camera, which breaks the \u201cuniform water glow\u201d assumption every medium model relies on.',
+    methods: [
+      ['M0 · 3DGS',           's3_deepvent_M0_3dgs',
+       'The chimney and talus slope come through intact, with the darkness simply left empty. Having no medium model turns out to be an advantage when the \u201cmedium\u201d is a moving lamp.'],
+      ['M2 · WaterSplatting', 's3_deepvent_M2_watersplatting',
+       'A skeleton. The medium field decided the co-moving light pattern WAS the water and swallowed most of the scene with it \u2014 this sparse residue is everything that survived. The most instructive cloud on the page.'],
+      ['M3 · SeaSplat',       's3_deepvent_M3_seasplat',
+       'Structurally complete but with a dimmer, muddier surface than M0: the analytic water terms keep trying to explain the lamp falloff and leave their fingerprints on the geometry.'] ],
+    start: 0 },
+  { name: 'S4 · EIVA industrial survey',
+    blurb: 'A real inspection pass over a submerged structure, with operational lighting and mild turbidity. This is the scene the methods exist for.',
+    methods: [
+      ['M0 · 3DGS',           's4_survey_M0_3dgs',
+       'A clean, coherent hull: on a well-overlapped survey trajectory in mild water, plain splatting places its points on the structure and little else.'],
+      ['M1 · UIE\u21923DGS', 's4_survey_M1_uie3dgs',
+       'Visually the tightest surface of the four \u2014 produced by nothing more than a classical 2D restoration pass in front of stock 3DGS. Simplicity wins the geometry here.'],
+      ['M2 · WaterSplatting', 's4_survey_M2_watersplatting',
+       'Sparse but faithful: the medium field soaks up the green cast and the splats concentrate on the hull. Very little floats.'],
+      ['M3 · SeaSplat',       's4_survey_M3_seasplat',
+       'Look around the hull\u2019s silhouette: solid clumps sit displaced from the structure. These are not translucent floaters \u2014 the model committed opaque geometry in the wrong places, which its good-looking renders never reveal.'] ],
+    start: 0 },
+];
+
+const canvas = document.getElementById('viewer');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x101318);
+const camera = new THREE.PerspectiveCamera(50, 16 / 9, 0.01, 100);
+camera.position.set(1.6, 1.0, 1.6);
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+
+function resize() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (canvas.width !== w || canvas.height !== h) {
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+}
+
+let cloud = null;
+const loader = new PLYLoader();
+const stats = document.getElementById('viewer-stats');
+function show(stem) {
+  stats.textContent = 'loading\u2026';
+  loader.load(`assets/pointclouds/${stem}.ply`, geo => {
+    try {
+      if (cloud) { scene.remove(cloud); cloud.geometry.dispose(); cloud.material.dispose(); }
+      geo.rotateX(Math.PI);
+      const mat = new THREE.PointsMaterial({ size: 0.008, vertexColors: true });
+      cloud = new THREE.Points(geo, mat);
+      scene.add(cloud);
+      controls.target.set(0, 0, 0);
+      stats.textContent = `${geo.getAttribute('position').count.toLocaleString()} points`;
+    } catch (e) { stats.textContent = 'render error: ' + e.message; }
+  }, undefined, err => {
+    const detail = err && err.target && err.target.status !== undefined
+      ? `HTTP ${err.target.status}` : (err && err.message ? err.message : String(err));
+    stats.textContent = `failed to load ${stem}.ply (${detail})`;
+    console.error('pointcloud load failed', stem, err);
+  });
+}
+
+const tabs = document.getElementById('dataset-tabs');
+const btns = document.getElementById('model-buttons');
+let activeDs = 0;
+
+const commentEl = document.getElementById('model-comment');
+function setComment(ds, comment) {
+  commentEl.innerHTML = `<strong>${ds.name}.</strong> ${ds.blurb}<br><em>${comment}</em>` +
+    '<br><span style="color:#7a7a7a;">Quantitative comparisons (PSNR, surface error, floater mass) are in the paper\u2019s Tables II\u2013IV.</span>';
+}
+function renderMethods() {
+  btns.innerHTML = '';
+  const ds = DATASETS[activeDs];
+  ds.methods.forEach(([label, stem, comment], i) => {
+    const fig = document.createElement('figure');
+    fig.className = 'model-btn' + (i === ds.start ? ' active' : '');
+    fig.innerHTML = `<img src="assets/thumbs/${stem}.jpg" alt="${label}"
+                       onerror="this.style.display='none'"><figcaption>${label}</figcaption>`;
+    fig.onclick = () => {
+      btns.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+      fig.classList.add('active');
+      show(stem);
+      setComment(ds, comment);
+    };
+    btns.appendChild(fig);
+  });
+  show(ds.methods[ds.start][1]);
+  setComment(ds, ds.methods[ds.start][2]);
+}
+
+DATASETS.forEach((ds, i) => {
+  const li = document.createElement('li');
+  if (i === 0) li.className = 'is-active';
+  li.innerHTML = `<a>${ds.name}</a>`;
+  li.onclick = () => {
+    tabs.querySelectorAll('li').forEach(x => x.classList.remove('is-active'));
+    li.classList.add('is-active');
+    activeDs = i;
+    renderMethods();
+  };
+  tabs.appendChild(li);
+});
+renderMethods();
+
+
+(function animate() {
+  requestAnimationFrame(animate);
+  resize();
+  controls.update();
+  renderer.render(scene, camera);
+})();
+</script>
+</body>
+</html>
