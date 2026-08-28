@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gaussian Splatting Underwater — A Controlled Cross-Regime Study</title>
+<title>Gaussian Splatting Underwater: A Controlled Cross-Regime Study</title>
 <meta name="description" content="A controlled cross-regime evaluation and component ablation of medium-aware 3D Gaussian splatting on subsea survey data.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <style>
@@ -60,8 +60,8 @@
       colour. Gaussians with opacity below 0.2 are dropped, clouds larger than
       250&thinsp;k points are randomly subsampled, and each cloud is centred and
       scaled by its robust (95th-percentile) radius for viewing. What you see is
-      therefore the model's <em>geometry</em> as the optimiser committed it &mdash;
-      including floaters and fabricated medium &mdash; not a rendered image.
+      therefore the model's <em>geometry</em> as the optimiser committed it,
+      including floaters and fabricated medium. It is not a rendered image.
     </p>
     <div class="tabs is-toggle is-centered is-small mb-3">
       <ul id="dataset-tabs"></ul>
@@ -126,7 +126,7 @@
     <div class="content">
       <ul>
         <li><span class="finding-num">Registration cliff.</span> COLMAP registers 99.5&thinsp;% of frames at 0&thinsp;NTU,
-            1.0&thinsp;% at 7, 0.0&thinsp;% at 12 &mdash; a cliff, not a slope, and every published benchmark sits below it.</li>
+            1.0&thinsp;% at 7, 0.0&thinsp;% at 12. A cliff, not a slope, and every published benchmark sits below it.</li>
         <li><span class="finding-num">PSNR saturates.</span> A per-pixel median of the training images gains +7.5&thinsp;dB
             from turbidity; every model's margin over it shrinks as water worsens.</li>
         <li><span class="finding-num">Three failure mechanisms.</span> Vanilla splatting reconstructs haze as a solid;
@@ -149,8 +149,8 @@
       <p>Everything behind the paper is in the <a href="https://github.com/olayasturias/uw3dgs">repository</a>:
       <code>experiments/runs/</code> holds every run's metrics, geometry evaluations and floater sweeps;
       <code>experiments/scenes/</code> the scene provenance (pose conventions, measured NTU);
-      <code>experiments/tools/</code> the full pipeline &mdash; scene builders, the unified evaluator, the run driver
-      and every figure generator. <code>experiments/SETUP.md</code> documents the shared environment and each
+      <code>experiments/tools/</code> the full pipeline (scene builders, the unified evaluator, the run driver
+      and every figure generator). <code>experiments/SETUP.md</code> documents the shared environment and each
       upstream code fix; <code>experiments/DATA.md</code> lists the datasets
       (SeaThru-NeRF, <a href="https://gitlab.com/apl-ocean-engineering/public_datasets/sotrue">SOTRUE</a>,
       Eiffel Tower) and how each scene was built.</p>
