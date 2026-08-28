@@ -17,7 +17,9 @@ from canonical_record import load_records  # noqa
 OUT = os.path.dirname(os.path.abspath(__file__))
 PDFS = os.path.join(os.path.dirname(OUT), "pdfs")
 os.makedirs(PDFS, exist_ok=True)
-UA = {"User-Agent": "Mozilla/5.0 (compatible; sota-report/0.4; +mailto:oat@eiva.com)"}
+_m = os.environ.get("SOTA_REPORT_MAILTO", "")
+UA = {"User-Agent": "Mozilla/5.0 (compatible; sota-report/0.4"
+                    + (f"; +mailto:{_m}" if _m else "") + ")"}
 
 CODE_RE = re.compile(
     r"(?:https?://)?(?:www\.)?(github\.com|gitlab\.com|bitbucket\.org|codeberg\.org)/"

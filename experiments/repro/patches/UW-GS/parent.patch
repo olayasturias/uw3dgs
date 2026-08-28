@@ -1,5 +1,5 @@
 From c7bf7d54cbe02f035c8a5fd72ad55cac7944c7b2 Mon Sep 17 00:00:00 2001
-From: oateiva <oat@eiva.com>
+From: oateiva <173450617+oateiva@users.noreply.github.com>
 Date: Fri, 21 Aug 2026 23:28:44 +0200
 Subject: Rename rasterizer package for shared cu124 env (uw3dgs); patch
  imports
@@ -49,7 +49,7 @@ index bb7220d..edef57f 100644
              "cuda_rasterizer/forward.cu",
 
 From be89f5c3d9adc4e040f417d21d84db537446fdba Mon Sep 17 00:00:00 2001
-From: oateiva <oat@eiva.com>
+From: oateiva <173450617+oateiva@users.noreply.github.com>
 Date: Sat, 22 Aug 2026 01:15:56 +0200
 Subject: Fix two upstream bugs: pass colors_precomp_clean to rasterizer
  (null-pointer CUDA crash on default path); reduce elementwise Ll1 before
@@ -1086,7 +1086,7 @@ HcmV?d00001
 
 
 From ee0096b134b30c6c4be4ae41768ba3fc6ec2d9ad Mon Sep 17 00:00:00 2001
-From: oateiva <oat@eiva.com>
+From: oateiva <173450617+oateiva@users.noreply.github.com>
 Date: Sat, 22 Aug 2026 01:16:17 +0200
 Subject: Untrack build artifacts
 

@@ -14,7 +14,10 @@ from canonical_record import load_records  # noqa
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 API = "https://api.openalex.org"
-MAILTO = "oat@eiva.com"
+# Contact for API "polite pool" rate limits (OpenAlex/Crossref/unpaywall).
+# Set SOTA_REPORT_MAILTO to your own address; left unset the requests still
+# work, just on the anonymous rate limit.
+MAILTO = os.environ.get("SOTA_REPORT_MAILTO", "")
 SEL = ("id,doi,title,display_name,publication_year,cited_by_count,type,"
        "primary_location,authorships,referenced_works,abstract_inverted_index,"
        "best_oa_location,open_access")

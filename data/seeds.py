@@ -9,7 +9,9 @@ import arxiv_search  # noqa
 OUT = os.path.dirname(os.path.abspath(__file__))
 PDFS = os.path.join(os.path.dirname(OUT), "pdfs")
 os.makedirs(PDFS, exist_ok=True)
-UA = {"User-Agent": "Mozilla/5.0 (sota-report/0.4; oat@eiva.com)"}
+_m = os.environ.get("SOTA_REPORT_MAILTO", "")
+UA = {"User-Agent": "Mozilla/5.0 (sota-report/0.4"
+                    + (f"; {_m}" if _m else "") + ")"}
 
 # (bibtex_key, title fragment to match in pool, fallback arxiv id)
 SEEDS = [

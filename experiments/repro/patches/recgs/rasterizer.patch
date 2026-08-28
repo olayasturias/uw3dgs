@@ -1,5 +1,5 @@
 From e98b66706a9492fa413393c52c2258fa21d5efbf Mon Sep 17 00:00:00 2001
-From: oateiva <oat@eiva.com>
+From: oateiva <173450617+oateiva@users.noreply.github.com>
 Date: Fri, 21 Aug 2026 23:28:42 +0200
 Subject: Rename rasterizer package for shared cu124 env (uw3dgs); patch
  imports

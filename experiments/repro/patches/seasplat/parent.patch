@@ -1,5 +1,5 @@
 From 7d58a0be8ef27579394ed8f470c186991f8f1b7c Mon Sep 17 00:00:00 2001
-From: oateiva <oat@eiva.com>
+From: oateiva <173450617+oateiva@users.noreply.github.com>
 Date: Fri, 21 Aug 2026 23:28:43 +0200
 Subject: Rename rasterizer package for shared cu124 env (uw3dgs); patch
  imports
@@ -31,7 +31,7 @@ index 729f6be..4782c07 160000
 +Subproject commit 4782c071623a57165abe4382601fdf029bf369ab
 
 From d65dfbea5907a7c209a4dac707e61f561ae8610c Mon Sep 17 00:00:00 2001
-From: oateiva <oat@eiva.com>
+From: oateiva <173450617+oateiva@users.noreply.github.com>
 Date: Sat, 22 Aug 2026 01:15:57 +0200
 Subject: metrics.py: use os.path.splitext, not split('.'), so image names
  containing dots resolve to their ground-truth files
@@ -55,7 +55,7 @@ index b90d098..55be82a 100644
          else:
 
 From eab703b0e42987e8898f760b41460f09cd3f102f Mon Sep 17 00:00:00 2001
-From: oateiva <oat@eiva.com>
+From: oateiva <173450617+oateiva@users.noreply.github.com>
 Date: Sat, 22 Aug 2026 11:05:52 +0200
 Subject: Add E4 ablation switches (abl_no_backscatter/A1, abl_no_depth_sup/A2,
  abl_no_medium/A3); respect explicit -m model_path

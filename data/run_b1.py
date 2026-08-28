@@ -6,6 +6,7 @@ underwater scenes" would not match all:"underwater gaussian splatting".
 So arXiv is driven here with a proper boolean search_query. OpenAlex uses the
 skill's module unchanged.
 """
+import os
 import sys, os, time, json, urllib.request, urllib.parse, re
 from datetime import date
 
@@ -36,7 +37,11 @@ def arxiv_boolean(search_query, max_results=100, timeout=45):
         "sortOrder": "descending",
     })
     url = f"{ARXIV_API}?{params}"
-    req = urllib.request.Request(url, headers={"User-Agent": "sota-report/0.4 (oat@eiva.com)"})
+    ua = "sota-report/0.4"
+    _m = os.environ.get("SOTA_REPORT_MAILTO", "")
+    if _m:
+        ua += f" ({_m})"
+    req = urllib.request.Request(url, headers={"User-Agent": ua})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         root = ET.fromstring(r.read())
 
