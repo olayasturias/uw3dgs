@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gaussian Splatting Underwater: A Controlled Cross-Regime Study</title>
 <meta name="description" content="A controlled cross-regime evaluation and component ablation of medium-aware 3D Gaussian splatting on subsea survey data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <style>
   /* Palette taken from olayasturias.github.io (the al-folio :root that wins the
@@ -32,16 +35,25 @@
     --on-dark-mute: rgba(190, 207, 228, 0.62);
   }
 
+  /* Type matches the personal site: Roboto, and light (300) for body copy and
+     headings alike, which is the look al-folio gives it. Roboto Slab is loaded
+     there but no rule ever uses it, so it is not loaded here. */
   html, body { background-color: var(--bg); }
-  body { font-family: 'Google Sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  body { font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+         font-size: 1rem; font-weight: 300; line-height: 1.5;
          color: var(--text); }
+  h1, h2, h3, h4, h5, h6,
+  .title, .subtitle { font-family: inherit; font-weight: 300; line-height: 1.2; }
   .title, .subtitle, h1, h2, h3, strong { color: var(--text); }
+  strong, b { font-weight: 500; }
+  .bibtex, code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  code { background-color: var(--code-bg); color: var(--text); }
   .content { color: var(--text); }
   a { color: var(--link); }
   a:hover { color: var(--link-dark); text-decoration: underline; }
   hr { background-color: var(--divider); }
 
-  .publication-title { font-size: 2rem; font-weight: 700; }
+  .publication-title { font-size: 2rem; font-weight: 300; }
   .publication-authors { font-size: 1.15rem; }
   .publication-authors a { color: var(--link); }
   .link-btn { margin: 0.15rem; border-radius: 9999px; }
