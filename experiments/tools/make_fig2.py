@@ -7,11 +7,30 @@ marker/linestyle secondary encoding for grayscale print. Data from the run
 ledger (runs/e2_*/DONE.json + geometry_surface.json), hardcoded here with
 provenance so the figure is regenerable and auditable.
 """
+import os
+import sys
+
 import matplotlib
 matplotlib.use("Agg")
 matplotlib.rcParams["pdf.fonttype"] = 42   # TrueType, not Type 3 (IEEE PDF compliance)
 matplotlib.rcParams["ps.fonttype"] = 42
 import matplotlib.pyplot as plt
+
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.path.join(ROOT, "docs", "assets")
+
+# Saved on a transparent ground so the figure sits flush on the project page
+# instead of showing as a white card. INK and MUTED are the page's --text and
+# --text-mute; PAGE_BG is its --bg, used only to punch the marker centres out
+# of the line behind them. All three are defined in docs/index.html :root.
+PAGE_BG = "#becfe4"
+INK = "#0e0915"
+MUTED = "#514c53"
+
+# Optional vector copy for the paper: --pdf-dir <dir>
+PDF_DIR = None
+if "--pdf-dir" in sys.argv:
+    PDF_DIR = sys.argv[sys.argv.index("--pdf-dir") + 1]
 
 X = [0.0, 6.0, 7.0, 12.0]  # measured NTU (median), scenes s2_turbid{0,2,3,5}_trial1
 
@@ -29,6 +48,8 @@ plt.rcParams.update({
     "font.size": 8, "axes.labelsize": 8, "xtick.labelsize": 7.5,
     "ytick.labelsize": 7.5, "axes.linewidth": 0.6,
     "font.family": "sans-serif",
+    "text.color": INK, "axes.labelcolor": INK, "axes.edgecolor": INK,
+    "xtick.color": INK, "ytick.color": INK,
 })
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(3.5, 4.0), sharex=True,
@@ -42,10 +63,10 @@ def plot(ax, key):
         ax.plot(xs, ys, color=s["color"], ls=s["ls"],  # does not imply a value
                 lw=1.4, alpha=0.35 if gap else 1.0, zorder=2)
         ax.plot(xs, ys, color=s["color"], marker=s["marker"], ls="none",
-                ms=4.5, markerfacecolor="white",
+                ms=4.5, markerfacecolor=PAGE_BG,
                 markeredgewidth=1.1, markeredgecolor=s["color"],
                 clip_on=False, zorder=3)
-    ax.grid(axis="y", color="0.88", lw=0.5, zorder=0)
+    ax.grid(axis="y", color=MUTED, alpha=0.25, lw=0.5, zorder=0)
     for sp in ("top", "right"):
         ax.spines[sp].set_visible(False)
 
@@ -54,11 +75,11 @@ ax1.set_ylabel("PSNR [dB] $\\uparrow$")
 ax1.set_ylim(27, 37.5)
 # direct labels at right end
 ax1.annotate("M2", (12, 36.38), xytext=(4, 2), textcoords="offset points",
-             color="#52514e", fontsize=7.5)
+             color=MUTED, fontsize=7.5)
 ax1.annotate("M0", (12, 35.11), xytext=(4, -8), textcoords="offset points",
-             color="#52514e", fontsize=7.5)
+             color=MUTED, fontsize=7.5)
 ax1.annotate("M3", (12, 28.13), xytext=(4, -2), textcoords="offset points",
-             color="#52514e", fontsize=7.5)
+             color=MUTED, fontsize=7.5)
 
 plot(ax2, "surf")
 ax2.set_yscale("log")
@@ -74,18 +95,22 @@ for ax in (ax1, ax2):
     ax.axvline(CROSS_NTU, color="0.55", lw=0.8, ls=(0, (2, 2)), zorder=1)
 ax2.annotate("M0/M2 cross\nin (0,6) NTU (measured)", (CROSS_NTU, 95),
              xytext=(6, 2), textcoords="offset points", fontsize=7,
-             color="#52514e")
+             color=MUTED)
 
 # shared legend (identity never color-alone: markers differ too)
 from matplotlib.lines import Line2D
 handles = [Line2D([], [], color=s["color"], marker=s["marker"], ls=s["ls"],
-                  lw=1.4, ms=4.5, markerfacecolor="white",
+                  lw=1.4, ms=4.5, markerfacecolor=PAGE_BG,
                   markeredgecolor=s["color"], label=n)
            for n, s in SERIES.items()]
 ax1.legend(handles=handles, loc="lower right", fontsize=7,
            frameon=False, handlelength=2.2, borderaxespad=0.1)
 
-for ext in ("pdf", "png"):
-    fig.savefig(rf"C:\Users\oat\workspace\sota-underwater-3dgs\paper\figures\fig2_dose_response.{ext}",
-                bbox_inches="tight", dpi=300)
-print("wrote fig2_dose_response.pdf/.png")
+os.makedirs(OUT, exist_ok=True)
+fig.savefig(os.path.join(OUT, "fig2_dose_response.png"),
+            bbox_inches="tight", dpi=300, transparent=True)
+print("wrote", os.path.join(OUT, "fig2_dose_response.png"))
+if PDF_DIR:
+    fig.savefig(os.path.join(PDF_DIR, "fig2_dose_response.pdf"),
+                bbox_inches="tight", dpi=300, transparent=True)
+    print("wrote", os.path.join(PDF_DIR, "fig2_dose_response.pdf"))

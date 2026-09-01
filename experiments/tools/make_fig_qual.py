@@ -4,6 +4,7 @@ is offset by one frame from the forks' split; its column shows the adjacent
 held-out frame (stated in the caption)."""
 import glob
 import os
+import sys
 
 import matplotlib
 matplotlib.use("Agg")
@@ -11,6 +12,19 @@ matplotlib.rcParams["pdf.fonttype"] = 42   # TrueType, not Type 3 (IEEE PDF comp
 matplotlib.rcParams["ps.fonttype"] = 42
 import matplotlib.pyplot as plt
 from PIL import Image
+
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.path.join(ROOT, "docs", "assets")
+
+# Transparent ground so the grid sits flush on the project page rather than as a
+# white card; INK and MUTED are the page's --text and --text-mute (docs/index.html).
+INK = "#0e0915"
+MUTED = "#514c53"
+
+# Optional vector copy for the paper: --pdf-dir <dir>
+PDF_DIR = None
+if "--pdf-dir" in sys.argv:
+    PDF_DIR = sys.argv[sys.argv.index("--pdf-dir") + 1]
 
 R = r"D:\uw3dgs\runs"
 ROWS = [
@@ -55,7 +69,8 @@ def load(path, target_h=240):
 
 
 fig, axes = plt.subplots(len(ROWS), 4, figsize=(7.16, 5.6))
-plt.rcParams.update({"font.size": 8, "font.family": "sans-serif"})
+plt.rcParams.update({"font.size": 8, "font.family": "sans-serif",
+                     "text.color": INK, "axes.labelcolor": INK})
 for r, row in enumerate(ROWS):
     stems = sorted(os.listdir(os.path.join(row["scene"], "images")))
     test = stems[::8]
@@ -80,7 +95,7 @@ for r, row in enumerate(ROWS):
             ax.imshow(load(path))
         else:
             ax.text(0.5, 0.5, "not run", ha="center", va="center",
-                    fontsize=8, color="0.45", transform=ax.transAxes)
+                    fontsize=8, color=MUTED, transform=ax.transAxes)
         if r == 0:
             ax.set_title(COLS[c], fontsize=8.5)
         if c == 0:
@@ -88,7 +103,9 @@ for r, row in enumerate(ROWS):
 
 plt.subplots_adjust(wspace=0.02, hspace=0.02, left=0.06, right=0.995,
                     top=0.95, bottom=0.005)
-for ext in ("pdf", "png"):
-    fig.savefig(rf"C:\Users\oat\workspace\sota-underwater-3dgs\paper\figures\fig_qual.{ext}",
-                dpi=300)
-print("wrote fig_qual.pdf/.png")
+os.makedirs(OUT, exist_ok=True)
+fig.savefig(os.path.join(OUT, "fig_qual.png"), dpi=300, transparent=True)
+print("wrote", os.path.join(OUT, "fig_qual.png"))
+if PDF_DIR:
+    fig.savefig(os.path.join(PDF_DIR, "fig_qual.pdf"), dpi=300, transparent=True)
+    print("wrote", os.path.join(PDF_DIR, "fig_qual.pdf"))
